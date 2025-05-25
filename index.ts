@@ -25,22 +25,22 @@ interface Action {
 const actions: Action[] = [
   {
     description: "announce quit",
-    shortcut: "q",
+    shortcut: "Q",
     code: "KeyQ",
   },
   {
     description: "announce clock",
-    shortcut: "c",
+    shortcut: "C",
     code: "KeyC",
   },
   {
     description: "announce last move",
-    shortcut: "l",
+    shortcut: "L",
     code: "KeyL",
   },
   {
     description: "announce opponent",
-    shortcut: "o",
+    shortcut: "O",
     code: "KeyO",
   },
 ];
@@ -56,31 +56,23 @@ function redraw() {
 function renderIntro(): VNode {
   return h("div", [
     h("h2", "Input"),
-    h("p", "Try these 3 commands: q, c, l, o"),
-    h("p", "They are mapped to QWERTY"),
+    h("p", "Whatever your keyboard is, these chars will be mapped to QWERTY: q, c, l, o"),
     h("label", [
       "type something",
       h("input.num-games", {
         attrs: { type: "text" },
         on: {
           keydown: (event) => {
-            if (event.code === "Tab" || event.shiftKey) return;
             const foundAction = actions.find((a) => a.code === event.code);
             if (foundAction) {
-              notify(foundAction.shortcut + " for '" + foundAction.description + "'");
-            } else notify(event.key + ' (not mapped)');
-            const target = event.target as HTMLInputElement;
-            event.preventDefault();
-            target.value = event.code;
+              const target = event.target as HTMLInputElement;
+              event.preventDefault();
+              target.value += foundAction.shortcut;
+            }
           },
         },
       }),
     ]),
     h("div#notification", { attrs: { "aria-live": "polite" } }),
   ]);
-}
-
-function notify(text: string) {
-  const notification = document.getElementById("notification");
-  if (notification) notification.textContent = "You typed " + text;
 }

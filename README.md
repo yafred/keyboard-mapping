@@ -1,7 +1,7 @@
 - npm init -y
 - npm install typescript esbuild chess.js snabbdom
 
-- npx esbuild index.ts --bundle --outfile=docs/v1/bundle.js
+- npx esbuild index.ts --bundle --outfile=docs/v2/bundle.js
 
 - npm install -g http-server
 - http-server -c-1
