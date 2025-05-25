@@ -782,6 +782,11 @@
   var container = document.getElementById("container");
   var actions = [
     {
+      description: "announce quit",
+      shortcut: "q",
+      code: "KeyQ"
+    },
+    {
       description: "announce clock",
       shortcut: "c",
       code: "KeyC"
@@ -805,7 +810,8 @@
   function renderIntro() {
     return h("div", [
       h("h2", "Input"),
-      h("p", "Try these 3 commands: c, l, o"),
+      h("p", "Try these 3 commands: q, c, l, o"),
+      h("p", "They are mapped to QWERTY"),
       h("label", [
         "type something",
         h("input.num-games", {
@@ -815,8 +821,8 @@
               if (event.code === "Tab" || event.shiftKey) return;
               const foundAction = actions.find((a) => a.code === event.code);
               if (foundAction) {
-                notify(foundAction.shortcut + " for " + foundAction.description);
-              } else notify(event.key);
+                notify(foundAction.shortcut + " for '" + foundAction.description + "'");
+              } else notify(event.key + " (not mapped)");
               const target = event.target;
               event.preventDefault();
               target.value = event.code;
