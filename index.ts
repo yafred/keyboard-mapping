@@ -56,10 +56,13 @@ function redraw() {
 function renderIntro(): VNode {
   return h("div", [
     h("h2", "Input"),
-    h("p", "Whatever your keyboard is, these chars will be mapped to QWERTY: q, c, l, o"),
+    h(
+      "p",
+      "Whatever your keyboard is, these chars will be mapped to QWERTY: q, c, l, o",
+    ),
     h("label", [
       "type something",
-      h("input.num-games", {
+      h("input", {
         attrs: { type: "text" },
         on: {
           keydown: (event) => {
@@ -73,6 +76,5 @@ function renderIntro(): VNode {
         },
       }),
     ]),
-    h("div#notification", { attrs: { "aria-live": "polite" } }),
   ]);
 }

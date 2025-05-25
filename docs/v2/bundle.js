@@ -810,10 +810,13 @@
   function renderIntro() {
     return h("div", [
       h("h2", "Input"),
-      h("p", "Whatever your keyboard is, these chars will be mapped to QWERTY: q, c, l, o"),
+      h(
+        "p",
+        "Whatever your keyboard is, these chars will be mapped to QWERTY: q, c, l, o"
+      ),
       h("label", [
         "type something",
-        h("input.num-games", {
+        h("input", {
           attrs: { type: "text" },
           on: {
             keydown: (event) => {
@@ -826,8 +829,7 @@
             }
           }
         })
-      ]),
-      h("div#notification", { attrs: { "aria-live": "polite" } })
+      ])
     ]);
   }
 })();
